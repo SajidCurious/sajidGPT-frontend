@@ -2,24 +2,50 @@ import send from "./assets/send.svg";
 import user from "./assets/user.png";
 import bot from "./assets/bot.png";
 import loadingIcon from "./assets/loader.svg";
+import { useState } from "react";
+
+let arr = [
+  { type: "user", post: "dfdfdfdf" },
+  { type: "bot", post: "dsfsfsfsf" },
+];
 
 function App() {
+  const [input, setInput] = useState("");
+  const [posts, setPosts] = useState(arr);
+
+  const onSubmit = () => {};
+
+  const updatePosts = () => {};
+
+  const onKeyUp = () => {};
+
   return (
     <main className="chatGPT-app">
       <section className="chat-container">
         <div className="layout">
-          <div className="chat-bubble">
-            <div className="avatar">
-              <img src={user} />
+          {posts.map((post, index) => (
+            <div
+              key={index}
+              className={`chat-bubble ${
+                post.type === "bot" || post.type === "loading" ? "bot" : ""
+              }`}
+            >
+              <div className="avatar">
+                <img
+                  src={
+                    post.type === "bot" || post.type === "loading" ? bot : user
+                  }
+                />
+              </div>
+              {post.type === "loading" ? (
+                <div className="loader">
+                  <img src={loadingIcon} />
+                </div>
+              ) : (
+                <div className="post">{post.post}</div>
+              )}
             </div>
-            <div className="post">Lorem ipsum dolor sit amet.</div>
-          </div>
-          <div className="chat-bubble bot">
-            <div className="avatar">
-              <img src={bot} />
-            </div>
-            <div className="post">Lorem ipsum dolor sit amet.</div>
-          </div>
+          ))}
         </div>
       </section>
       <footer>
@@ -28,9 +54,10 @@ function App() {
           autoFocus
           type="text"
           placeholder="Ask Anything"
-          onChange={() => {}}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyUp={onKeyUp}
         />
-        <div className="send-button">
+        <div className="send-button" onClick={onSubmit}>
           <img src={send} />
         </div>
       </footer>
