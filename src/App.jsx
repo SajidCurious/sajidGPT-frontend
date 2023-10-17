@@ -24,7 +24,11 @@ function App() {
     });
   };
 
-  const onKeyUp = () => {};
+  const onKeyUp = (e) => {
+    if (e.key === "Enter" || e.key === 13) {
+      onSubmit();
+    }
+  };
 
   return (
     <main className="chatGPT-app">
