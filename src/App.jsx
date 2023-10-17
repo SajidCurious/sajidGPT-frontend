@@ -1,3 +1,8 @@
+import send from "./assets/send.svg";
+import user from "./assets/user.png";
+import bot from "./assets/bot.png";
+import loadingIcon from "./assets/loader.svg";
+
 function App() {
   return (
     <main className="chatGPT-app">
