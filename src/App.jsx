@@ -4,18 +4,25 @@ import bot from "./assets/bot.png";
 import loadingIcon from "./assets/loader.svg";
 import { useState } from "react";
 
-let arr = [
-  { type: "user", post: "dfdfdfdf" },
-  { type: "bot", post: "dsfsfsfsf" },
-];
+// let arr = [
+//   { type: "user", post: "dfdfdfdf" },
+//   { type: "bot", post: "dsfsfsfsf" },
+// ];
 
 function App() {
   const [input, setInput] = useState("");
-  const [posts, setPosts] = useState(arr);
+  const [posts, setPosts] = useState([]);
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    if (input.trim() === "") return;
+    updatePosts(input);
+  };
 
-  const updatePosts = () => {};
+  const updatePosts = (post) => {
+    setPosts((prevState) => {
+      return [...prevState, { type: "user", post }];
+    });
+  };
 
   const onKeyUp = () => {};
 
@@ -23,7 +30,7 @@ function App() {
     <main className="chatGPT-app">
       <section className="chat-container">
         <div className="layout">
-          {posts.map((post, index) => (
+          {posts?.map((post, index) => (
             <div
               key={index}
               className={`chat-bubble ${
